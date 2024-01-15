@@ -49,6 +49,29 @@
         <input type="reset" value="취소">
       </div>
     </form>
+    <script>
+    function saveUserInfo() {
+      var uid = document.getElementById('uid').value;
+      var uemail = document.getElementById('uemail').value;
+      var pwd1 = document.getElementById('pwd1').value;
+
+      // AJAX 또는 Fetch API를 사용하여 서버로 데이터 전송
+      fetch('/save_user_info.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ uid: uid, uemail: uemail, pwd1: pwd1 }),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('저장 성공:', data);
+      })
+      .catch(error => {
+        console.error('저장 실패:', error);
+      });
+    }
+  </script>
   </div>           
 </body>
 </html>
