@@ -1,40 +1,21 @@
+<!-- D:\xampp\htdocs\save_user_info.php -->
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // 데이터베이스 연결 및 입력값 가져오기
-    $uid = $_POST["uid"];
-    $umail = $_POST["umail"];
-    $pwd1 = $_POST["pwd1"];
-    $pwd2 = $_POST["pwd2"];
-    $mailing = $_POST["mailing"];
+    // 사용자 정보 가져오기
+    $username = $_POST["username"];
+    $email = $_POST["email"];
 
-    // 데이터베이스 연결 정보 설정 (아래 정보를 실제 데이터베이스 정보로 변경해야 합니다)
-    $servername = "your_servername"; // 예: localhost
-    $username = "your_username";
-    $password = "your_password";
-    $dbname = "your_database";
+    // 사용자 정보를 파일에 저장 (D 드라이브의 C:\xampp\htdocs 디렉토리에 저장)
+    $data = "이름: $username, 이메일: $email\n";
+    $file_path = "C:\\xampp\\htdocs\\user_info.txt";
+    file_put_contents($file_path, $data, FILE_APPEND | LOCK_EX);
 
-    // 데이터베이스 연결
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // 연결 확인
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // 비밀번호 해싱 (보안을 위해 사용자 비밀번호를 해싱하여 저장하는 것이 좋습니다)
-    $hashed_pwd = password_hash($pwd1, PASSWORD_DEFAULT);
-
-    // 사용자 정보를 데이터베이스에 저장하는 INSERT 쿼리
-    $sql = "INSERT INTO users (uid, umail, password, mailing)
-            VALUES ('$uid', '$umail', '$hashed_pwd', '$mailing')";
-
-    if ($conn->query($sql) === TRUE) {
-        echo "회원 가입이 완료되었습니다.";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-
-    // 데이터베이스 연결 종료
-    $conn->close();
+    // 클라이언트에 응답 보내기 (JSON 형식으로 응답)
+    $response = array("status" => "success", "message" => "사용자 정보가 성공적으로 저장되었습니다.");
+    echo json_encode($response);
+} else {
+    // 잘못된 요청에 대한 응답
+    header('HTTP/1.1 400 Bad Request');
+    echo "잘못된 요청입니다.";
 }
 ?>
