@@ -1,38 +1,38 @@
-<! DOCTYPE html>
-<html 랑="코">
-<머리>
-  <  메타    charset="UTF-8">
-  <제목>Site YS</제목>
-  <스타일>
-       /* CSS 코드는 여기에 작성하세요 */   
-        *     
-   상자 크기: 테두리 상자;   
-   여백: 0;   
-   패딩: 0;   
-       }   
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>YS Site</title>
+  <style>
+    /* CSS 코드는 여기에 작성하세요 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    몸    
-   글꼴 가족: 아리얼, 산세리프;   
-   배경색: #f0f0f0;   
-       }   
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+    }
 
-   .컨테이너 {   
-   폭: 500px;   
-   여백: 50px 자동;   
-   배경색: 흰색;   
-   경계: 1px 고체 #cccc;   
-   패딩: 20px;   
-       }   
+    .container {
+      width: 500px;
+      margin: 50px auto;
+      background-color: white;
+      border: 1px solid #cccccc;
+      padding: 20px;
+    }
 
- h1 { 
-   텍스트 정렬: 중심;   
-   색상: #333333;   
-   글꼴 크기: 24px;   
-       }   
+    h1 {
+      text-align: center;
+      color: #333333;
+      font-size: 24px;
+    }
 
- .form-group { 
-   여백: 10px 0;   
-       }   
+    .form-group {
+      margin: 10px 0;
+    }
 
     .form-group label {
       display: block;
@@ -75,7 +75,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>Site YS</h1>
+    <h1>first my site YS</h1>
     <form id="signup-form" method="post" action="#">
       <div class="form-group">
         <label for="username">아이디</label>
@@ -151,51 +151,51 @@
       // 비밀번호 유효성 검사
       if (!passwordRegex.test(password.value)) {
         // 정규표현식에 맞지 않으면 에러 메시지를 보여주고, 유효성 검사 플래그를 false로 설정합니다.
- 암호 오류 textContent = "비밀번호는 4~12자의 영문 대소문자와 숫자로만 입력해주세요.";
- isValid = 거짓;
-      } 다른 {
+        passwordError.textContent = "비밀번호는 4~12자의 영문 대소문자와 숫자로만 입력해주세요.";
+        isValid = false;
+      } else {
         // 정규표현식에 맞으면 에러 메시지를 지웁니다.
- 암호 오류 textContent = "";
+        passwordError.textContent = "";
       }
 
       // 비밀번호 확인 유효성 검사
-      만약 (      != 비밀번호 확인.    가치) {
+      if (password.value !== passwordConfirm.value) {
         // 비밀번호와 비밀번호 확인이 일치하지 않으면 에러 메시지를 보여주고, 유효성 검사 플래그를 false로 설정합니다.
-         암호 확인 오류입니다.         텍스트        내용  =         "비밀번호와 비밀번호 확인이 일치하지 않습니다.";
-         isValid = 거짓입니다.       
-      }          다른          {
+        passwordConfirmError.textContent = "비밀번호와 비밀번호 확인이 일치하지 않습니다.";
+        isValid = false;
+      } else {
         // 비밀번호와 비밀번호 확인이 일치하면 에러 메시지를 지웁니다.
-               암호 확인 오류입니다.               텍스트               내용  =                "";
+        passwordConfirmError.textContent = "";
       }
 
       // 이메일 유효성 검사
-      만약 (!emailRegex.시험(이메일value)) {
+      if (!emailRegex.test(email.value)) {
         // 정규표현식에 맞지 않으면 에러 메시지를 보여주고, 유효성 검사 플래그를 false로 설정합니다.
-               이메일 오류 textContent =               "올바른 이메일 형식이 아닙니다.";
-              isValid = 거짓입니다.            
-      }               다른               {
+        emailError.textContent = "올바른 이메일 형식이 아닙니다.";
+        isValid = false;
+      } else {
         // 정규표현식에 맞으면 에러 메시지를 지웁니다.
-              이메일 오류 textContent =              "";
+        emailError.textContent = "";
       }
 
       // 이름 유효성 검사
-      만약 (              ===              "") {
+      if (name.value === "") {
         // 이름이 비어있으면 에러 메시지를 보여주고, 유효성 검사 플래그를 false로 설정합니다.
-               오류 텍스트 콘텐츠 =               "이름을 입력해주세요.";
-               isValid = 거짓입니다.               
-      }               다른               {
+        nameError.textContent = "이름을 입력해주세요.";
+        isValid = false;
+      } else {
         // 이름이 비어있지 않으면 에러 메시지를 지웁니다.
-              이름 오류 텍스트  내용 =               "";
+        nameError.textContent = "";
       }
 
       // 유효성 검사 플래그가 true이면 폼을 제출합니다.
-      만약 (이발리드) {
-        경각심("회원가입이 완료되었습니다.");
-             형태야             제출();
+      if (isValid) {
+        alert("회원가입이 완료되었습니다.");
+        form.submit();
       }
     }
 
     // 폼 제출 이벤트에 핸들러를 등록합니다.
-             형태야 추가  이벤트              리스테너("항복", handleSubmit);
-              <            /스크립트>
+    form.addEventListener("submit", handleSubmit);
+  </script>
 </html>
