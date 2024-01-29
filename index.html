@@ -2,200 +2,109 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>YS Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>숫자 맞추기 게임</title>
   <style>
-    /* CSS 코드는 여기에 작성하세요 */
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
       font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-    }
-
-    .container {
-      width: 500px;
-      margin: 50px auto;
-      background-color: white;
-      border: 1px solid #cccccc;
-      padding: 20px;
-    }
-
-    h1 {
       text-align: center;
-      color: #333333;
-      font-size: 24px;
+      margin-top: 20px; /* 50px에서 20px로 수정 */
+      animation: fadeIn 2s ease-in-out;
     }
 
-    .form-group {
-      margin: 10px 0;
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
-    .form-group label {
-      display: block;
-      font-weight: bold;
-      color: #666666;
+    #output {
+      font-size: 1.2em; /* 1.5em에서 1.2em로 수정 */
+      margin-bottom: 15px; /* 20px에서 15px로 수정 */
     }
 
-    .form-group input {
-      display: block;
-      width: 100%;
-      height: 30px;
-      border: 1px solid #cccccc;
+    #guessInput {
       padding: 5px;
+      font-size: 1em;
     }
 
-    .form-group input:focus {
-      outline: none;
-      border-color: #999999;
+    #result {
+      font-size: 1.1em; /* 1.2em에서 1.1em로 수정 */
+      font-weight: bold;
+      color: green;
     }
 
-    .form-group button {
-      display: inline-block;
-      width: 100px;
-      height: 30px;
-      border: none;
-      background-color: #333333;
-      color: white;
+    button {
       cursor: pointer;
+      transition: transform 0.2s ease-in-out;
     }
 
-    .form-group button:hover {
-      background-color: #666666;
+    button:hover {
+      transform: scale(1.1);
     }
 
-    .error {
-      color: red;
-      font-size: 12px;
+    .shake {
+      animation: shake 0.5s ease-in-out;
+    }
+
+    @keyframes shake {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      25%, 75% {
+        transform: translateX(-5px);
+      }
+      50% {
+        transform: translateX(5px);
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>first my site YS</h1>
-    <form id="signup-form" method="post" action="#">
-      <div class="form-group">
-        <label for="username">아이디</label>
-        <input type="text" id="username" name="username" required>
-        <span class="error" id="username-error"></span>
-      </div>
-      <div class="form-group">
-        <label for="password">비밀번호</label>
-        <input type="password" id="password" name="password" required>
-        <span class="error" id="password-error"></span>
-      </div>
-      <div class="form-group">
-        <label for="password-confirm">비밀번호 확인</label>
-        <input type="password" id="password-confirm" name="password-confirm" required>
-        <span class="error" id="password-confirm-error"></span>
-      </div>
-      <div class="form-group">
-        <label for="email">이메일</label>
-        <input type="email" id="email" name="email" required>
-        <span class="error" id="email-error"></span>
-      </div>
-      <div class="form-group">
-        <label for="name">이름</label>
-        <input type="text" id="name" name="name" required>
-        <span class="error" id="name-error"></span>
-      </div>
-      <div class="form-group">
-        <button type="submit" id="submit-button">회원가입</button>
-      </div>
-    </form>
-  </div>
+
+  <h1>숫자 맞추기 게임</h1>
+
+  <p id="output">1에서 100까지의 숫자를 맞춰보세요!</p>
+
+  <label for="guessInput">입력: </label>
+  <input type="text" id="guessInput" placeholder="숫자를 입력하세요">
+  <button onclick="checkGuess()">확인</button>
+
+  <p id="result"></p>
+
   <script>
-    // JavaScript 코드는 여기에 작성하세요
-    // 폼 요소를 선택합니다.
-    var form = document.getElementById("signup-form");
-    var username = document.getElementById("username");
-    var password = document.getElementById("password");
-    var passwordConfirm = document.getElementById("password-confirm");
-    var email = document.getElementById("email");
-    var name = document.getElementById("name");
-    var submitButton = document.getElementById("submit-button");
+    var targetNumber = Math.floor(Math.random() * 100) + 1;
+    var attempts = 0;
 
-    // 에러 메시지 요소를 선택합니다.
-    var usernameError = document.getElementById("username-error");
-    var passwordError = document.getElementById("password-error");
-    var passwordConfirmError = document.getElementById("password-confirm-error");
-    var emailError = document.getElementById("email-error");
-    var nameError = document.getElementById("name-error");
+    function checkGuess() {
+      var guess = document.getElementById('guessInput').value;
+      var result = document.getElementById('result');
+      var button = document.querySelector('button');
+      attempts++;
 
-    // 정규표현식을 정의합니다.
-    var usernameRegex = /^[a-zA-Z0-9]{4,12}$/; // 4~12자의 영문 대소문자와 숫자로만 구성
-    var passwordRegex = /^[a-zA-Z0-9]{4,12}$/; // 4~12자의 영문 대소문자와 숫자로만 구성
-    var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/; // 이메일 형식
-
-    // 폼 제출 이벤트를 처리하는 함수를 정의합니다.
-    function handleSubmit(event) {
-      // 기본 동작을 막습니다. (페이지 새로고침 방지)
-      event.preventDefault();
-
-      // 유효성 검사 플래그를 정의합니다.
-      var isValid = true;
-
-      // 아이디 유효성 검사
-      if (!usernameRegex.test(username.value)) {
-        // 정규표현식에 맞지 않으면 에러 메시지를 보여주고, 유효성 검사 플래그를 false로 설정합니다.
-        usernameError.textContent = "아이디는 4~12자의 영문 대소문자와 숫자로만 입력해주세요.";
-        isValid = false;
+      if (guess == targetNumber) {
+        result.innerHTML = '축하합니다! ' + attempts + '번만에 숫자를 맞추셨습니다!';
+        result.style.color = 'green';
+      } else if (guess < targetNumber) {
+        result.innerHTML = '너무 작아요! 다시 시도해보세요.';
+        result.style.color = 'red';
+        button.classList.add('shake');
+        setTimeout(function() {
+          button.classList.remove('shake');
+        }, 500);
       } else {
-        // 정규표현식에 맞으면 에러 메시지를 지웁니다.
-        usernameError.textContent = "";
-      }
-
-      // 비밀번호 유효성 검사
-      if (!passwordRegex.test(password.value)) {
-        // 정규표현식에 맞지 않으면 에러 메시지를 보여주고, 유효성 검사 플래그를 false로 설정합니다.
-        passwordError.textContent = "비밀번호는 4~12자의 영문 대소문자와 숫자로만 입력해주세요.";
-        isValid = false;
-      } else {
-        // 정규표현식에 맞으면 에러 메시지를 지웁니다.
-        passwordError.textContent = "";
-      }
-
-      // 비밀번호 확인 유효성 검사
-      if (password.value !== passwordConfirm.value) {
-        // 비밀번호와 비밀번호 확인이 일치하지 않으면 에러 메시지를 보여주고, 유효성 검사 플래그를 false로 설정합니다.
-        passwordConfirmError.textContent = "비밀번호와 비밀번호 확인이 일치하지 않습니다.";
-        isValid = false;
-      } else {
-        // 비밀번호와 비밀번호 확인이 일치하면 에러 메시지를 지웁니다.
-        passwordConfirmError.textContent = "";
-      }
-
-      // 이메일 유효성 검사
-      if (!emailRegex.test(email.value)) {
-        // 정규표현식에 맞지 않으면 에러 메시지를 보여주고, 유효성 검사 플래그를 false로 설정합니다.
-        emailError.textContent = "올바른 이메일 형식이 아닙니다.";
-        isValid = false;
-      } else {
-        // 정규표현식에 맞으면 에러 메시지를 지웁니다.
-        emailError.textContent = "";
-      }
-
-      // 이름 유효성 검사
-      if (name.value === "") {
-        // 이름이 비어있으면 에러 메시지를 보여주고, 유효성 검사 플래그를 false로 설정합니다.
-        nameError.textContent = "이름을 입력해주세요.";
-        isValid = false;
-      } else {
-        // 이름이 비어있지 않으면 에러 메시지를 지웁니다.
-        nameError.textContent = "";
-      }
-
-      // 유효성 검사 플래그가 true이면 폼을 제출합니다.
-      if (isValid) {
-        alert("회원가입이 완료되었습니다.");
-        form.submit();
+        result.innerHTML = '너무 크네요! 다시 시도해보세요.';
+        result.style.color = 'red';
+        button.classList.add('shake');
+        setTimeout(function() {
+          button.classList.remove('shake');
+        }, 500);
       }
     }
-
-    // 폼 제출 이벤트에 핸들러를 등록합니다.
-    form.addEventListener("submit", handleSubmit);
   </script>
+
+</body>
 </html>
