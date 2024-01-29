@@ -8,8 +8,7 @@
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      margin-top: 20px; /* 50px에서 20px로 수정 */
-      animation: fadeIn 2s ease-in-out;
+      margin-top: 20px;
     }
 
     @keyframes fadeIn {
@@ -21,9 +20,25 @@
       }
     }
 
+    @keyframes rotateIn {
+      from {
+        transform: rotate(-180deg);
+      }
+      to {
+        transform: rotate(0deg);
+      }
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 30px;
+      color: #3498db; /* 파란색 */
+      animation: fadeIn 2s ease-in-out, rotateIn 2s ease-in-out; /* 두 개의 애니메이션 적용 */
+    }
+
     #output {
-      font-size: 1.2em; /* 1.5em에서 1.2em로 수정 */
-      margin-bottom: 15px; /* 20px에서 15px로 수정 */
+      font-size: 1.2em;
+      margin-bottom: 15px;
     }
 
     #guessInput {
@@ -32,7 +47,7 @@
     }
 
     #result {
-      font-size: 1.1em; /* 1.2em에서 1.1em로 수정 */
+      font-size: 1.1em;
       font-weight: bold;
       color: green;
     }
