@@ -1,125 +1,40 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>숫자 맞추기 게임</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
-    @keyframes rotateIn {
-      from {
-        transform: rotate(-180deg);
-      }
-      to {
-        transform: rotate(0deg);
-      }
-    }
-
-    h1 {
-      font-size: 3em;
-      margin-bottom: 30px;
-      color: #3498db; /* 파란색 */
-      animation: fadeIn 2s ease-in-out, rotateIn 2s ease-in-out; /* 두 개의 애니메이션 적용 */
-    }
-
-    #output {
-      font-size: 1.2em;
-      margin-bottom: 15px;
-    }
-
-    #guessInput {
-      padding: 5px;
-      font-size: 1em;
-    }
-
-    #result {
-      font-size: 1.1em;
-      font-weight: bold;
-      color: green;
-    }
-
-    button {
-      cursor: pointer;
-      transition: transform 0.2s ease-in-out;
-    }
-
-    button:hover {
-      transform: scale(1.1);
-    }
-
-    .shake {
-      animation: shake 0.5s ease-in-out;
-    }
-
-    @keyframes shake {
-      0%, 100% {
-        transform: translateX(0);
-      }
-      25%, 75% {
-        transform: translateX(-5px);
-      }
-      50% {
-        transform: translateX(5px);
-      }
-    }
-  </style>
+  <title>my portfolio</title>
+  <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
+  <div class="container">
+    <header>
+      <p>cover</p>
+      <ul>
+        <li><a href="#">Home</a>
+        </li>
+        <li><a href="#">Features</a>
+        </li>
+        <li><a href="#">contact</a>
+        </li>
+      </ul>
+    </header>
 
-  <h1>숫자 맞추기 게임</h1>
+    <section>
+      <p>my page</p>
+      <p>This is my first page<br>나의 첫 페이지</p>
+      <p>연락처 : 010-4449-9245 <br> email : pus9245@naver.com</p>
 
-  <p id="output">1에서 100까지의 숫자를 맞춰보세요!</p>
+      <a href="https://github.com/ParkYusin/.github.io.git">Github 방문</a>
+    </section>
 
-  <label for="guessInput">입력: </label>
-  <input type="text" id="guessInput" placeholder="숫자를 입력하세요">
-  <button onclick="checkGuess()">확인</button>
+    <footer>
+      Cover template for <a href="https://code.visualstudio.com/"> VScode</a> by <a href="img/ParkYusin이력서.jpg">@Parkyusin</a>
+    </footer>
 
-  <p id="result"></p>
 
-  <script>
-    var targetNumber = Math.floor(Math.random() * 100) + 1;
-    var attempts = 0;
 
-    function checkGuess() {
-      var guess = document.getElementById('guessInput').value;
-      var result = document.getElementById('result');
-      var button = document.querySelector('button');
-      attempts++;
-
-      if (guess == targetNumber) {
-        result.innerHTML = '축하합니다! ' + attempts + '번만에 숫자를 맞추셨습니다!';
-        result.style.color = 'green';
-      } else if (guess < targetNumber) {
-        result.innerHTML = '너무 작아요! 다시 시도해보세요.';
-        result.style.color = 'red';
-        button.classList.add('shake');
-        setTimeout(function() {
-          button.classList.remove('shake');
-        }, 500);
-      } else {
-        result.innerHTML = '너무 크네요! 다시 시도해보세요.';
-        result.style.color = 'red';
-        button.classList.add('shake');
-        setTimeout(function() {
-          button.classList.remove('shake');
-        }, 500);
-      }
-    }
-  </script>
-
+  </div>
+  
 </body>
 </html>
