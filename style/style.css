@@ -10,7 +10,7 @@ body {
 }
 
 .container {
-  width: 700px;
+  width: 1000px;
   margin: 0 auto;
   box-sizing: border-box;
   height: 100vh;
@@ -23,7 +23,7 @@ body {
 header {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  width: 80%;
   align-items: center;
   padding: 1.2rem 0;
 }
@@ -57,8 +57,30 @@ header>ul>li:first-child>a{
     flex-direction: column;
   }
 }
-
+.material-symbols-outlined {
+  text-decoration: none;
+  color: black;
+background-color: white;
+border-radius: 30%;
+padding: 10px;
+text-align: center;
+}
+.main {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  width: 100%;
+}
+.sideBar {
+  list-style: none;
+  display: flex;
+  width: 10%;
+  height: 100%;
+  align-items: center;
+}
 section {
+  margin: 0 auto;
+  width: 80%;
   padding: 0 3rem;
   text-align: center;
 }
@@ -79,7 +101,7 @@ section>a {
   width: 150px;
   font-size: 1.3rem;
   font-weight: 600;
-  margin: 0auto;
+  margin: 0 auto;
   padding: 1rem;
   border-radius: 10px;
   text-decoration: none;
