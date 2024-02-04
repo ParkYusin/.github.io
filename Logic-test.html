@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logic</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0 auto;
+      background-color: #eee;
+    }
+    .container {
+      width: 92vw;
+      height: 92vh;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+    }
+    .main {
+      width: 60vw;
+      height: 60vw;
+      margin: 0 auto;
+      background-color: #fff;
+      display: grid;
+      grid-template-columns: repeat(var(--pieceCss), 1fr);
+      grid-template-rows: repeat(var(--pieceCss), 1fr); 
+      border: 3px solid;
+    }
+    @media screen and (min-width : 500px){
+      .main {
+        width: 60vh;
+        height: 60vh;
+      }
+    }
+
+    .fivepiece{
+      display: grid;
+      grid-template-columns: repeat(5,1fr);
+      grid-template-rows: repeat(5,1fr);
+      border: 1px solid #444;
+      border-collapse: collapse;
+    }
+    .piece {
+      border-collapse: collapse;
+      background-color: #555;
+      border: 0.5px dotted rgba(5, 5, 0, 0.7);
+    }
+
+    .piece.active{
+      background-color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="container"> 
+    <div class="main"></div>
+  </div>
+  <script>  
+    let setPiece = prompt("가로 세로");
+    let setFivePiece = (setPiece**2)/25;
+    let pieceCss = setPiece/5;
+    let isMouseDown = false;
+
+    document.documentElement.style.setProperty('--pieceCss', pieceCss);
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const container = document.querySelector('.main');
+
+      for (let i = 0; i < setFivePiece; i++) {
+        const fivePieceDiv = document.createElement('div');
+        fivePieceDiv.classList.add('fivepiece');
+        
+        for (let j = 0; j < 25; j++) {
+          const pieceDiv = document.createElement('div');
+          pieceDiv.classList.add('piece');
+          fivePieceDiv.appendChild(pieceDiv);
+
+          pieceDiv.addEventListener('mousedown', function () {
+            isMouseDown = true;
+            this.classList.toggle('active');
+          });
+
+          pieceDiv.addEventListener('mouseenter', function () {
+            if (isMouseDown) {
+              this.classList.toggle('active');
+            }
+          });
+
+          pieceDiv.addEventListener('mouseup', function () {
+            isMouseDown = false;
+          });
+        }
+
+        container.appendChild(fivePieceDiv);
+      }
+    });
+  </script>
+</body>
+</html>

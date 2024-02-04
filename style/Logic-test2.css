@@ -1,0 +1,120 @@
+* {
+  margin: 0;
+  padding: 0;
+  /* border: 1px solid black; */
+}
+body {
+  background-color: #333;
+  color: white;
+  
+}
+
+.container {
+  width: 1000px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  align-items: center;
+  padding: 1.2rem 0;
+}
+header>p {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+header>ul {
+  display: flex;
+}
+header>ul>li {
+  list-style-type: none;
+  margin-left: 1.5rem;
+}
+header>ul>li>a {
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: 800;
+  padding-bottom: 5px;
+  color: white;
+}
+
+header>ul>li>a:hover {
+border-bottom: 5px solid gray;
+}
+header>ul>li:first-child>a{
+  border-bottom: 5px solid gray;
+}
+@media screen and (max-width: 700px) {
+  header {
+    flex-direction: column;
+  }
+}
+.material-symbols-outlined {
+  text-decoration: none;
+  color: black;
+background-color: white;
+border-radius: 30%;
+padding: 10px;
+text-align: center;
+}
+.main {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  width: 100%;
+}
+.sideBar {
+  list-style: none;
+  display: flex;
+  width: 10%;
+  height: 100%;
+  align-items: center;
+}
+
+.mainLogic {
+  width: 70%;
+  height: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: repeat(var(--pieceCss), 1fr);
+  grid-template-rows: repeat(var(--pieceCss), 1fr);
+  border: 3px solid;
+}
+.fivepiece{
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  grid-template-rows: repeat(5,1fr);
+  border: 1px solid #444;
+  border-collapse: collapse;
+}
+.piece {
+  border-collapse: collapse;
+  background-color: #555;
+  border: 0.5px dotted rgba(5, 5, 0, 0.7);
+}
+
+.piece.active{
+  background-color: #fff;
+}
+
+footer {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  color: gray;
+}
+footer .it{
+  font-style: italic;
+}
+footer >a {
+  text-decoration: none;
+  color: white;
+}

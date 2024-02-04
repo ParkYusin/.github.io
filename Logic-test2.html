@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>my portfolio</title>
+  <link rel="stylesheet" href="style/Logic-test2.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <p>cover</p>
+      <ul>
+        <li><a href="#">Home</a>
+        </li>
+        <li><a href="#">Features</a>
+        </li>
+        <li><a href="#">contact</a>
+        </li>
+      </ul>
+    </header>
+
+    <div class="main">
+      <aside class="sideBar">
+        <li><a href="index.html"<span class="material-symbols-outlined">
+           arrow_back_ios
+          </span></a>
+        </li>
+      </aside>
+      <section class="mainLogic">
+
+
+      </section>
+      <aside class="sideBar">
+        <li><a href="Logic.html"<span class="material-symbols-outlined">
+          arrow_forward_ios 
+          </span></a>
+        </li>
+      </aside>
+    </div>
+
+    <footer>
+      Cover template for <a href="https://code.visualstudio.com/"> VScode</a> by <a href="img/ParkYusin이력서.jpg">@Parkyusin(resume)</a>
+    </footer>
+  </div>
+  <script>  
+    let setPiece = prompt("가로 세로");
+    let setFivePiece = (setPiece**2)/25;
+    let pieceCss = setPiece/5;
+    let isMouseDown = false;
+
+    document.documentElement.style.setProperty('--pieceCss', pieceCss);
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const container = document.querySelector('.mainLogic');
+
+      for (let i = 0; i < setFivePiece; i++) {
+        const fivePieceDiv = document.createElement('div');
+        fivePieceDiv.classList.add('fivepiece');
+        
+        for (let j = 0; j < 25; j++) {
+          const pieceDiv = document.createElement('div');
+          pieceDiv.classList.add('piece');
+          fivePieceDiv.appendChild(pieceDiv);
+
+          pieceDiv.addEventListener('mousedown', function () {
+            isMouseDown = true;
+            this.classList.toggle('active');
+          });
+
+          pieceDiv.addEventListener('mouseenter', function () {
+            if (isMouseDown) {
+              this.classList.toggle('active');
+            }
+          });
+
+          pieceDiv.addEventListener('mouseup', function () {
+            isMouseDown = false;
+          });
+        }
+
+        container.appendChild(fivePieceDiv);
+      }
+    });
+  </script>
+</body>
+</html>

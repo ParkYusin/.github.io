@@ -50,13 +50,10 @@
   </div>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
-      // Get all the .piece elements
       const pieces = document.querySelectorAll('.piece');
 
-      // Add click event listener to each .piece element
       pieces.forEach(piece => {
         piece.addEventListener('click', function () {
-          // Toggle the background color on click
           this.classList.toggle('active');
         });
       });
