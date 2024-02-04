@@ -10,7 +10,7 @@ body {
 }
 
 .container {
-  width: 1000px;
+  width: 60vw;
   margin: 0 auto;
   box-sizing: border-box;
   height: 100vh;
@@ -52,7 +52,8 @@ border-bottom: 5px solid gray;
 header>ul>li:first-child>a{
   border-bottom: 5px solid gray;
 }
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 450px) {
+
   header {
     flex-direction: column;
   }
@@ -113,6 +114,7 @@ footer {
   margin-bottom: 2rem;
   font-size: 1.1rem;
   color: gray;
+  justify-content: center;
 }
 footer .it{
   font-style: italic;
