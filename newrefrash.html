@@ -4,13 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    .container {
+      display: flex;
+      padding: 10px;
+    }
+    header{
+      flex-wrap: nowrap;
+    }
+    #T-menu{
+      margin-top: 3%;
+      padding: 10px;
+      flex-direction: row-reverse;
+    }
+    #T-logo{
+      width: 50px;
+    }
+
+  </style>
 </head>
 <body>
   <header>
-    <div class="top_menu">
-      <a href="">로그인</a>
-      <a href="">회원가입</a>
-      <a href="">고객센터</a>
+    <div class="container" id="T-menu">
+      <div class="container" id="login"></div><a href=""> 로그인 </a>
+      <div class="container" id="resister"></div><a href=""> 회원가입 </a>
+      <div class="container" id="center"></div><a href=""> 고객센터 </a>
+    </div>
+    <div class="container" id="T-logo">
+      <img src="img/11.png" alt="">
+      </div>
     </div>
   </header>
   <main>
