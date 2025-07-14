@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSAFY 반 친구 퀴즈</title>
+    <!-- CSS 파일 연결: style.css 파일이 index.html과 같은 폴더에 있어야 합니다. -->
+    <link rel="stylesheet" href="style.css">
+    <!-- SSAFY 파비콘 (선택 사항) -->
+    <link rel="icon" href="https://www.ssafy.com/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <!-- SSAFY 로고 이미지 -->
+        <!-- 로고 이미지 경로가 올바른지 확인해주세요. (온라인 경로 또는 로컬 images 폴더 내 경로) -->
+        <img src="https://www.ssafy.com/images/common/logo.png" alt="SSAFY 로고" class="ssafy-logo">
+    </header>
+
+    <main class="container">
+        <h1>SSAFY 반 친구 암기 게임</h1>
+
+        <!-- 퀴즈 선택 옵션 -->
+        <div id="quiz-options">
+            <button id="face-to-name-btn" class="main-btn">얼굴로 이름 맞추기 퀴즈</button>
+            <button id="name-to-face-btn" class="main-btn">이름으로 얼굴 맞추기 퀴즈</button>
+        </div>
+
+        <!-- 퀴즈 진행 영역 (초기에는 숨김) -->
+        <div id="quiz-area" class="hidden">
+            <div id="score-area">
+                점수: <span id="current-score">0</span> / <span id="total-questions">0</span>
+            </div>
+            <div id="feedback-message" class="feedback"></div>
+
+            <!-- 얼굴로 이름 맞추기 퀴즈 섹션 -->
+            <div id="face-to-name-quiz" class="quiz-section hidden">
+                <img id="quiz-face-image" src="" alt="반 친구 얼굴" class="quiz-image">
+                <div id="face-name-choices" class="choices-grid"></div>
+            </div>
+
+            <!-- 이름으로 얼굴 맞추기 퀴즈 섹션 -->
+            <div id="name-to-face-quiz" class="quiz-section hidden">
+                <h2 id="quiz-name-text"></h2>
+                <div id="name-face-choices" class="choices-grid"></div>
+            </div>
+
+            <button id="next-question-btn" class="hidden">다음 문제</button>
+        </div>
+
+        <!-- 퀴즈 완료 영역 (초기에는 숨김) -->
+        <div id="quiz-complete-area" class="hidden">
+            <h2>퀴즈 완료!</h2>
+            <p>최종 점수: <span id="final-score">0</span> / <span id="final-total">0</span></p>
+            <button id="restart-quiz-btn">다시 플레이</button>
+        </div>
+    </main>
+
+    <!-- JavaScript 파일 연결: script.js 파일이 index.html과 같은 폴더에 있어야 합니다. -->
+    <script src="script.js"></script>
+</body>
+</html>
