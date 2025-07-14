@@ -112,11 +112,18 @@
 
     .choice-btn, .choice-image-btn {
       background-color: var(--card-background);
+      color: var(--text-color);
       border: 1px solid var(--border-color);
       padding: 10px;
       border-radius: 8px;
       font-size: 1em;
       cursor: pointer;
+      word-break: break-word;
+      transition: transform 0.15s ease-in-out;
+    }
+
+    .choice-btn:hover, .choice-image-btn:hover {
+      transform: scale(1.05);
     }
 
     .choice-image {
@@ -155,7 +162,7 @@
   <section class="game-selection hidden" id="game-selection">
     <h2>무엇을 해볼까요?</h2>
     <button onclick="startQuiz()">맞춰보자!</button>
-    <button><a href="https://g.co/gemini/share/bcab049a513d" target="_blank" style="color:white; text-decoration:none;">TMI 게임</a></button>
+    <button><a href="https://g.co/gemini/share/d114076de714" target="_blank" style="color:white; text-decoration:none;">TMI 게임</a></button>
   </section>
 
   <header>
