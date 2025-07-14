@@ -1,61 +1,168 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SSAFY 반 친구 퀴즈</title>
-    <!-- CSS 파일 연결: style.css 파일이 index.html과 같은 폴더에 있어야 합니다. -->
-    <link rel="stylesheet" href="style.css">
-    <!-- SSAFY 파비콘 (선택 사항) -->
-    <link rel="icon" href="https://www.ssafy.com/favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SSAFY 반 친구 퀴즈</title>
+  <link rel="icon" href="https://www.ssafy.com/favicon.ico" type="image/x-icon">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    .intro-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .intro-section h1 {
+      font-size: 3rem;
+      margin: 0.5em 0;
+      animation: slideIn 1.5s ease-out;
+    }
+
+    .next-btn {
+      font-size: 1.5rem;
+      padding: 0.8em 2em;
+      margin-top: 2em;
+      cursor: pointer;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      border-radius: 10px;
+      transition: background-color 0.3s;
+    }
+
+    .next-btn:hover {
+      background-color: #0056b3;
+    }
+
+    .game-selection {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 100px 20px 40px;
+    }
+
+    .game-selection h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5em;
+    }
+
+    .game-btn {
+      font-size: 1.5rem;
+      padding: 1em 2.5em;
+      margin: 1em;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      background-color: #28a745;
+      color: white;
+      transition: background-color 0.3s;
+    }
+
+    .game-btn:hover {
+      background-color: #1e7e34;
+    }
+
+    .game-btn a {
+      color: white;
+      text-decoration: none;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      0%   { transform: translateY(-50px); opacity: 0; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <!-- SSAFY 로고 이미지 -->
-        <!-- 로고 이미지 경로가 올바른지 확인해주세요. (온라인 경로 또는 로컬 images 폴더 내 경로) -->
-        <img src="https://www.ssafy.com/images/common/logo.png" alt="SSAFY 로고" class="ssafy-logo">
-    </header>
+  <!-- Intro Section -->
+  <section class="intro-section" id="intro">
+    <h1>SSAFY 14기 서울 18반</h1>
+    <h1>마이스터고트랙</h1>
+    <h1>친해지기</h1>
+    <button class="next-btn" onclick="showGameSelection()">다음</button>
+  </section>
 
-    <main class="container">
-        <h1>SSAFY 반 친구 암기 게임</h1>
+  <!-- Game Selection Section -->
+  <section class="game-selection" id="game-selection">
+    <h2>무엇을 해볼까요?</h2>
+    <button class="game-btn" onclick="startQuiz()">맞춰보자!</button>
+    <button class="game-btn"><a href="https://example.com/tmi-game" target="_blank">TMI 게임</a></button>
+  </section>
 
-        <!-- 퀴즈 선택 옵션 -->
-        <div id="quiz-options">
-            <button id="face-to-name-btn" class="main-btn">얼굴로 이름 맞추기 퀴즈</button>
-            <button id="name-to-face-btn" class="main-btn">이름으로 얼굴 맞추기 퀴즈</button>
-        </div>
+  <!-- 퀴즈 게임 원본 영역 -->
+  <header>
+    <img src="https://www.ssafy.com/images/common/logo.png" alt="SSAFY 로고" class="ssafy-logo">
+  </header>
 
-        <!-- 퀴즈 진행 영역 (초기에는 숨김) -->
-        <div id="quiz-area" class="hidden">
-            <div id="score-area">
-                점수: <span id="current-score">0</span> / <span id="total-questions">0</span>
-            </div>
-            <div id="feedback-message" class="feedback"></div>
+  <main class="container hidden" id="main-quiz">
+    <h1>SSAFY 반 친구 암기 게임</h1>
 
-            <!-- 얼굴로 이름 맞추기 퀴즈 섹션 -->
-            <div id="face-to-name-quiz" class="quiz-section hidden">
-                <img id="quiz-face-image" src="" alt="반 친구 얼굴" class="quiz-image">
-                <div id="face-name-choices" class="choices-grid"></div>
-            </div>
+    <div id="quiz-options">
+      <button id="face-to-name-btn" class="main-btn">얼굴로 이름 맞추기 퀴즈</button>
+      <button id="name-to-face-btn" class="main-btn">이름으로 얼굴 맞추기 퀴즈</button>
+    </div>
 
-            <!-- 이름으로 얼굴 맞추기 퀴즈 섹션 -->
-            <div id="name-to-face-quiz" class="quiz-section hidden">
-                <h2 id="quiz-name-text"></h2>
-                <div id="name-face-choices" class="choices-grid"></div>
-            </div>
+    <div id="quiz-area" class="hidden">
+      <div id="score-area">
+        점수: <span id="current-score">0</span> / <span id="total-questions">0</span>
+      </div>
+      <div id="feedback-message" class="feedback"></div>
 
-            <button id="next-question-btn" class="hidden">다음 문제</button>
-        </div>
+      <div id="face-to-name-quiz" class="quiz-section hidden">
+        <img id="quiz-face-image" src="" alt="반 친구 얼굴" class="quiz-image">
+        <div id="face-name-choices" class="choices-grid"></div>
+      </div>
 
-        <!-- 퀴즈 완료 영역 (초기에는 숨김) -->
-        <div id="quiz-complete-area" class="hidden">
-            <h2>퀴즈 완료!</h2>
-            <p>최종 점수: <span id="final-score">0</span> / <span id="final-total">0</span></p>
-            <button id="restart-quiz-btn">다시 플레이</button>
-        </div>
-    </main>
+      <div id="name-to-face-quiz" class="quiz-section hidden">
+        <h2 id="quiz-name-text"></h2>
+        <div id="name-face-choices" class="choices-grid"></div>
+      </div>
 
-    <!-- JavaScript 파일 연결: script.js 파일이 index.html과 같은 폴더에 있어야 합니다. -->
-    <script src="script.js"></script>
+      <button id="next-question-btn" class="hidden">다음 문제</button>
+    </div>
+
+    <div id="quiz-complete-area" class="hidden">
+      <h2>퀴즈 완료!</h2>
+      <p>최종 점수: <span id="final-score">0</span> / <span id="final-total">0</span></p>
+      <button id="restart-quiz-btn">다시 플레이</button>
+    </div>
+  </main>
+
+  <!-- 스크립트 영역 -->
+  <script>
+    function showGameSelection() {
+      document.getElementById('intro').style.display = 'none';
+      document.getElementById('game-selection').style.display = 'flex';
+    }
+
+    function startQuiz() {
+      document.getElementById('game-selection').style.display = 'none';
+      document.getElementById('main-quiz').classList.remove('hidden');
+    }
+  </script>
+
+  <!-- 기존 script.js 연결은 그대로 유지됩니다 -->
+  <script src="script.js"></script>
 </body>
 </html>
