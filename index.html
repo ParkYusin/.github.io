@@ -49,6 +49,13 @@
     .ssafy-logo {
       max-width: 160px;
       height: auto;
+      opacity: 0.05;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+    }
+
+    .ssafy-logo:hover {
+      opacity: 1;
     }
 
     .container, .intro-section, .game-selection {
@@ -162,11 +169,11 @@
   <section class="game-selection hidden" id="game-selection">
     <h2>무엇을 해볼까요?</h2>
     <button onclick="startQuiz()">맞춰보자!</button>
-    <button><a href="https://g.co/gemini/share/d114076de714" target="_blank" style="color:white; text-decoration:none;">TMI 게임</a></button>
+    <button><a href="https://g.co/gemini/share/fe903e423b5f" target="_blank" style="color:white; text-decoration:none;">TMI 게임</a></button>
   </section>
 
   <header>
-    <img src="images/x-icon.png" alt="SSAFY 로고" class="ssafy-logo">
+    <img src="images/x-icon.png" alt="SSAFY 로고" class="ssafy-logo" onclick="triggerEasterEgg()">
   </header>
 
   <main class="container hidden" id="main-quiz">
@@ -209,6 +216,10 @@
       const quiz = document.getElementById('main-quiz');
       quiz.classList.remove('hidden');
       quiz.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function triggerEasterEgg() {
+      alert("🎉 축하합니다! SSAFY 이스터에그를 발견했어요!");
     }
   </script>
 
