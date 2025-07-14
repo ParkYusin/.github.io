@@ -4,30 +4,160 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SSAFY 반 친구 퀴즈</title>
-  <link rel="icon" href="https://www.ssafy.com/favicon.ico" type="image/x-icon.png">
+  <link rel="icon" href="images/x-icon.png" type="image/png">
   <style>
-    /* 스타일 생략 가능 — 현재 주신 CSS가 이미 적용된 상태라고 가정합니다 */
+    :root {
+      --primary-color: #007AFF;
+      --primary-dark: #005bb5;
+      --background-color: #f0f2f5;
+      --text-color: #1c1c1e;
+      --secondary-text-color: #636366;
+      --card-background: #ffffff;
+      --border-color: #e8e8ed;
+      --correct-color: #34c759;
+      --incorrect-color: #ff3b30;
+      --shadow-light: rgba(0, 0, 0, 0.08);
+      --shadow-medium: rgba(0, 0, 0, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    header {
+      width: 100%;
+      padding: 20px 0;
+      background-color: var(--card-background);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 4px var(--shadow-light);
+    }
+
+    .ssafy-logo {
+      max-width: 160px;
+      height: auto;
+    }
+
+    .container, .intro-section, .game-selection {
+      width: 95%;
+      max-width: 600px;
+      background-color: var(--card-background);
+      padding: 30px;
+      margin: 20px auto;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px var(--shadow-medium);
+    }
+
+    h1 {
+      font-size: 2em;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      border-radius: 10px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      margin: 10px;
+      width: 80%;
+      max-width: 300px;
+    }
+
+    button:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .main-btn {
+      width: 90%;
+      max-width: 350px;
+    }
+
+    .quiz-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+
+    .choices-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .choice-btn, .choice-image-btn {
+      background-color: var(--card-background);
+      border: 1px solid var(--border-color);
+      padding: 10px;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    .choice-image {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .feedback {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .correct {
+      color: var(--correct-color);
+    }
+
+    .incorrect {
+      color: var(--incorrect-color);
+    }
+
+    .hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
-  <!-- Intro Section -->
   <section class="intro-section" id="intro">
     <h1>SSAFY 14기 서울 18반</h1>
     <h1>마이스터고트랙</h1>
     <h1>친해지기</h1>
-    <button class="next-btn" onclick="showGameSelection()">다음</button>
+    <button onclick="showGameSelection()">다음</button>
   </section>
 
-  <!-- Game Selection Section -->
-  <section class="game-selection" id="game-selection">
+  <section class="game-selection hidden" id="game-selection">
     <h2>무엇을 해볼까요?</h2>
-    <button class="game-btn" onclick="startQuiz()">맞춰보자!</button>
-    <button class="game-btn">
-      <a href="https://g.co/gemini/share/bcab049a513d" target="_blank">TMI 게임</a>
-    </button>
+    <button onclick="startQuiz()">맞춰보자!</button>
+    <button><a href="https://g.co/gemini/share/bcab049a513d" target="_blank" style="color:white; text-decoration:none;">TMI 게임</a></button>
   </section>
 
-  <!-- 퀴즈 게임 영역 -->
   <header>
     <img src="images/x-icon.png" alt="SSAFY 로고" class="ssafy-logo">
   </header>
@@ -41,21 +171,16 @@
     </div>
 
     <div id="quiz-area" class="hidden">
-      <div id="score-area">
-        점수: <span id="current-score">0</span> / <span id="total-questions">0</span>
-      </div>
+      <div id="score-area">점수: <span id="current-score">0</span> / <span id="total-questions">0</span></div>
       <div id="feedback-message" class="feedback"></div>
-
       <div id="face-to-name-quiz" class="quiz-section hidden">
         <img id="quiz-face-image" src="" alt="반 친구 얼굴" class="quiz-image">
         <div id="face-name-choices" class="choices-grid"></div>
       </div>
-
       <div id="name-to-face-quiz" class="quiz-section hidden">
         <h2 id="quiz-name-text"></h2>
         <div id="name-face-choices" class="choices-grid"></div>
       </div>
-
       <button id="next-question-btn" class="hidden">다음 문제</button>
     </div>
 
@@ -66,22 +191,20 @@
     </div>
   </main>
 
-  <!-- 스크립트 -->
   <script>
     function showGameSelection() {
-      document.getElementById('intro').style.display = 'none';
-      document.getElementById('game-selection').style.display = 'flex';
+      document.getElementById('intro').classList.add('hidden');
+      document.getElementById('game-selection').classList.remove('hidden');
     }
 
     function startQuiz() {
-      document.getElementById('game-selection').style.display = 'none';
-      const mainQuiz = document.getElementById('main-quiz');
-      mainQuiz.classList.remove('hidden');
-      mainQuiz.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.getElementById('game-selection').classList.add('hidden');
+      const quiz = document.getElementById('main-quiz');
+      quiz.classList.remove('hidden');
+      quiz.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   </script>
 
-  <!-- 기존 퀴즈 로직 JS -->
   <script src="script.js"></script>
 </body>
 </html>
