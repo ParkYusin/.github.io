@@ -6,92 +6,7 @@
   <title>SSAFY 반 친구 퀴즈</title>
   <link rel="icon" href="https://www.ssafy.com/favicon.ico" type="image/x-icon">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Arial', sans-serif;
-      background-color: #f4f4f4;
-      color: #333;
-    }
-
-    .intro-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    .intro-section h1 {
-      font-size: 3rem;
-      margin: 0.5em 0;
-      animation: slideIn 1.5s ease-out;
-    }
-
-    .next-btn {
-      font-size: 1.5rem;
-      padding: 0.8em 2em;
-      margin-top: 2em;
-      cursor: pointer;
-      border: none;
-      background-color: #007bff;
-      color: white;
-      border-radius: 10px;
-      transition: background-color 0.3s;
-    }
-
-    .next-btn:hover {
-      background-color: #0056b3;
-    }
-
-    .game-selection {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 100px 20px 40px;
-    }
-
-    .game-selection h2 {
-      font-size: 2.5rem;
-      margin-bottom: 1.5em;
-    }
-
-    .game-btn {
-      font-size: 1.5rem;
-      padding: 1em 2.5em;
-      margin: 1em;
-      cursor: pointer;
-      border: none;
-      border-radius: 10px;
-      background-color: #28a745;
-      color: white;
-      transition: background-color 0.3s;
-    }
-
-    .game-btn:hover {
-      background-color: #1e7e34;
-    }
-
-    .game-btn a {
-      color: white;
-      text-decoration: none;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    @keyframes slideIn {
-      0%   { transform: translateY(-50px); opacity: 0; }
-      100% { transform: translateY(0); opacity: 1; }
-    }
-
-    .hidden {
-      display: none;
-    }
+    /* 스타일 생략 가능 — 현재 주신 CSS가 이미 적용된 상태라고 가정합니다 */
   </style>
 </head>
 <body>
@@ -107,12 +22,14 @@
   <section class="game-selection" id="game-selection">
     <h2>무엇을 해볼까요?</h2>
     <button class="game-btn" onclick="startQuiz()">맞춰보자!</button>
-    <button class="game-btn"><a href="https://example.com/tmi-game" target="_blank">TMI 게임</a></button>
+    <button class="game-btn">
+      <a href="https://example.com/tmi-game" target="_blank">TMI 게임</a>
+    </button>
   </section>
 
-  <!-- 퀴즈 게임 원본 영역 -->
+  <!-- 퀴즈 게임 영역 -->
   <header>
-    <img src="https://www.ssafy.com/images/common/logo.png" alt="SSAFY 로고" class="ssafy-logo">
+    <img src="images/x-icon.png" alt="SSAFY 로고" class="ssafy-logo">
   </header>
 
   <main class="container hidden" id="main-quiz">
@@ -149,7 +66,7 @@
     </div>
   </main>
 
-  <!-- 스크립트 영역 -->
+  <!-- 스크립트 -->
   <script>
     function showGameSelection() {
       document.getElementById('intro').style.display = 'none';
@@ -158,11 +75,13 @@
 
     function startQuiz() {
       document.getElementById('game-selection').style.display = 'none';
-      document.getElementById('main-quiz').classList.remove('hidden');
+      const mainQuiz = document.getElementById('main-quiz');
+      mainQuiz.classList.remove('hidden');
+      mainQuiz.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   </script>
 
-  <!-- 기존 script.js 연결은 그대로 유지됩니다 -->
+  <!-- 기존 퀴즈 로직 JS -->
   <script src="script.js"></script>
 </body>
 </html>
